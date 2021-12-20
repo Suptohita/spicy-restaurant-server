@@ -21,11 +21,18 @@ async function run(){
 
         const database = client.db('spicy-restaurant')
         const foodImageCollection = database.collection('food_image')
+        const menuCollection = database.collection('menu')
 
         app.get('/gallery', async(req, res) => {
             const cursor = await foodImageCollection.find({})
             const foodImage = await cursor.toArray()
             res.send(foodImage)
+        })
+
+        app.get('/menu', async(req, res) => {
+            const cursor = await menuCollection.find({})
+            const menu = await cursor.toArray()
+            res.send(menu)  
         })
     }
     finally{
