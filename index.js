@@ -22,17 +22,27 @@ async function run(){
         const database = client.db('spicy-restaurant')
         const foodImageCollection = database.collection('food_image')
         const menuCollection = database.collection('menu')
+        const featureDishCollection = database.collection('feature-dish')
 
+        // getting gallery image 
         app.get('/gallery', async(req, res) => {
             const cursor = await foodImageCollection.find({})
             const foodImage = await cursor.toArray()
             res.send(foodImage)
         })
 
+        // getting menu 
         app.get('/menu', async(req, res) => {
             const cursor = await menuCollection.find({})
             const menu = await cursor.toArray()
             res.send(menu)  
+        })
+
+        // getting feature dish
+        app.get('/feature-dish', async(req, res) => {
+            const cursor = await featureDishCollection.find({})
+            const featureDish = await cursor.toArray()
+            res.send(featureDish)
         })
     }
     finally{
