@@ -23,6 +23,7 @@ async function run(){
         const foodImageCollection = database.collection('food_image')
         const menuCollection = database.collection('menu')
         const featureDishCollection = database.collection('feature-dish')
+        const chefCollection = database.collection('chef')
 
         // getting gallery image 
         app.get('/gallery', async(req, res) => {
@@ -43,6 +44,13 @@ async function run(){
             const cursor = await featureDishCollection.find({})
             const featureDish = await cursor.toArray()
             res.send(featureDish)
+        })
+
+        //getting chef data
+        app.get('/chef', async(req, res) => {
+            const cursor = await chefCollection.find({})
+            const chef = await cursor.toArray()
+            res.send(chef)
         })
     }
     finally{
