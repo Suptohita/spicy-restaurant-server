@@ -24,6 +24,7 @@ async function run(){
         const menuCollection = database.collection('menu')
         const featureDishCollection = database.collection('feature-dish')
         const chefCollection = database.collection('chef')
+        const userCollection = database.collection('users-collection')
 
         // getting gallery image 
         app.get('/gallery', async(req, res) => {
@@ -51,6 +52,13 @@ async function run(){
             const cursor = await chefCollection.find({})
             const chef = await cursor.toArray()
             res.send(chef)
+        })
+
+        // collecting register user 
+        app.post('/registerUsers', async(req, res) => {
+            const data = req.body
+            const result = await userCollection.insertOne(data)
+            res.send(result)
         })
     }
     finally{
